@@ -89,8 +89,55 @@ def show(project: str) -> None:
 
 @app.command()
 def summarize(project: str) -> None:
-    """Generate a project summary."""
-    raise typer.Exit()
+    """Generate a project summary via LLM."""
+
+    from tpman.ai.summarizer import ProjectSummarizer
+    from tpman.config import settings
+    from tpman.db.repo import ProjectRepository
+    from tpman.db.session import SessionLocal
+
+    if not settings.openai_api_key:
+        typer.echo(
+            "Error: OPENAI_API_KEY not set. "
+            "Add it to .env or export OPENAI_API_KEY=sk-..."
+        )
+        raise typer.Exit(1)
+
+    with SessionLocal() as session:
+        repo = ProjectRepository(session)
+        p = repo.get_by_slug(project)
+        if not p:
+            typer.echo(f"Project '{project}' not found.")
+            raise typer.Exit(1)
+
+        summarizer = ProjectSummarizer()
+        try:
+            summary = summarizer.summarize(p.id)
+        except Exception as e:
+            typer.echo(f"Error generating summary: {e}")
+            raise typer.Exit(1)
+
+        typer.echo(f"\n{'=' * 60}")
+        typer.echo(f"  Summary: {p.name}")
+        typer.echo(f"{'=' * 60}\n")
+        typer.echo(summary.summary_text)
+
+        if summary.highlights:
+            typer.echo("\n  ✓ Highlights:")
+            for item in summary.highlights:
+                typer.echo(f"      • {item}")
+
+        if summary.blockers:
+            typer.echo("\n  ⚠ Blockers:")
+            for item in summary.blockers:
+                typer.echo(f"      • {item}")
+
+        if summary.suggested_next_actions:
+            typer.echo("\n  → Next Actions:")
+            for item in summary.suggested_next_actions:
+                typer.echo(f"      • {item}")
+
+        typer.echo()
 
 
 @app.command()

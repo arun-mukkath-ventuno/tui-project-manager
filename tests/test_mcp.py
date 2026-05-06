@@ -19,4 +19,5 @@ def test_register_tools() -> None:
     assert "list_projects" in tool_names
     assert "get_project_detail" in tool_names
     assert "list_tasks" in tool_names
+    assert "generate_summary" in tool_names
     assert "refresh_source_data" in tool_names

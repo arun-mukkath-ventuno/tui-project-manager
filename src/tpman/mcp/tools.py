@@ -95,6 +95,42 @@ def register_tools(mcp):
             return json.dumps(result, indent=2)
 
     @mcp.tool()
+    def generate_summary(project_slug: str) -> str:
+        """Generate an AI summary for a project by slug."""
+        from tpman.ai.summarizer import ProjectSummarizer
+        from tpman.config import settings
+
+        if not settings.openai_api_key:
+            return json.dumps(
+                {"error": "OPENAI_API_KEY not set in .env"}
+            )
+
+        with SessionLocal() as session:
+            repo = ProjectRepository(session)
+            project = repo.get_by_slug(project_slug)
+            if not project:
+                return json.dumps(
+                    {"error": f"Project '{project_slug}' not found"}
+                )
+
+        summarizer = ProjectSummarizer()
+        try:
+            summary = summarizer.summarize(project.id)
+        except Exception as e:
+            return json.dumps({"error": str(e)})
+
+        return json.dumps(
+            {
+                "project": project.name,
+                "summary_text": summary.summary_text,
+                "highlights": summary.highlights,
+                "blockers": summary.blockers,
+                "suggested_next_actions": summary.suggested_next_actions,
+            },
+            indent=2,
+        )
+
+    @mcp.tool()
     def refresh_source_data() -> str:
         """Refresh source data from markdown trackers and sync to SQLite."""
         if not settings.projects_dir.exists():
