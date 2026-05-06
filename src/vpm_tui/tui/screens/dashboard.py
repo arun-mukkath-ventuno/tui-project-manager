@@ -3,7 +3,7 @@
 import json
 
 from textual.app import ComposeResult
-from textual.containers import Vertical
+from textual.containers import Container, Horizontal
 from textual.screen import Screen
 from textual.widgets import DataTable, Footer, Header, Static
 
@@ -20,12 +20,23 @@ class DashboardScreen(Screen):
 
     def compose(self) -> ComposeResult:
         yield Header()
-        with Vertical():
-            yield Static("TUI Project Manager — Dashboard", id="title")
-            table = DataTable(id="projects-table")
-            table.cursor_type = "row"
-            yield table
-            yield Static("", id="status-bar")
+        with Container(classes="app-shell"):
+            with Container(classes="hero"):
+                yield Static("TUI Project Manager", classes="hero-title")
+                yield Static(
+                    "Markdown-first control room for project trackers",
+                    classes="hero-subtitle",
+                )
+                with Horizontal(classes="stat-strip"):
+                    yield Static("", id="project-count", classes="stat-card")
+                    yield Static("", id="task-count", classes="stat-card")
+                    yield Static("", id="sync-count", classes="stat-card")
+            with Container(classes="panel"):
+                yield Static("Projects", classes="section-title")
+                table = DataTable(id="projects-table")
+                table.cursor_type = "row"
+                yield table
+            yield Static("", id="status-bar", classes="muted")
         yield Footer()
 
     def on_mount(self) -> None:
@@ -70,10 +81,13 @@ class DashboardScreen(Screen):
             repo = ProjectRepository(session)
             projects = repo.get_all()
             total_tasks = 0
+            latest_sync = "-"
             for p in projects:
                 counts = json.loads(p.task_counts or "{}")
                 total = sum(counts.values())
                 total_tasks += total
+                if p.last_synced_at:
+                    latest_sync = str(p.last_synced_at)[:19]
                 table.add_row(
                     p.name,
                     str(total),
@@ -85,6 +99,16 @@ class DashboardScreen(Screen):
                     str(p.last_synced_at)[:19] if p.last_synced_at else "-",
                     key=p.slug,
                 )
+
+            self.query_one("#project-count", Static).update(
+                f"[b]{len(projects)}[/b]\n[dim]projects[/dim]"
+            )
+            self.query_one("#task-count", Static).update(
+                f"[b]{total_tasks}[/b]\n[dim]tasks[/dim]"
+            )
+            self.query_one("#sync-count", Static).update(
+                f"[b]{latest_sync}[/b]\n[dim]latest sync[/dim]"
+            )
 
             status = self.query_one("#status-bar", Static)
             if projects:

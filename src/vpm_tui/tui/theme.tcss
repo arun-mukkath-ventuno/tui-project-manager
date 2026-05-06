@@ -1,0 +1,118 @@
+Screen {
+    background: #0b1020;
+    color: #e5eefb;
+}
+
+Header {
+    background: #0f1730;
+    color: #f4f7ff;
+}
+
+Footer {
+    background: #0f1730;
+    color: #8ea0c6;
+}
+
+.app-shell {
+    padding: 1 2;
+}
+
+.hero {
+    background: #121b34;
+    border: heavy #263457;
+    padding: 1 2;
+    margin-bottom: 1;
+}
+
+.hero-title {
+    text-style: bold;
+    color: #ffffff;
+    height: auto;
+}
+
+.hero-subtitle {
+    color: #8ea0c6;
+    margin-top: 1;
+}
+
+.stat-strip {
+    layout: horizontal;
+    height: auto;
+    margin: 1 0;
+}
+
+.stat-card {
+    background: #11182c;
+    border: round #2b3a5d;
+    padding: 0 1;
+    width: 1fr;
+    height: auto;
+}
+
+.stat-label {
+    color: #8ea0c6;
+}
+
+.stat-value {
+    color: #ffffff;
+    text-style: bold;
+}
+
+.panel {
+    background: #11182c;
+    border: round #24324d;
+    padding: 1;
+}
+
+.section-title {
+    text-style: bold;
+    color: #ffffff;
+    margin-bottom: 1;
+}
+
+.muted {
+    color: #8ea0c6;
+}
+
+.summary-panel {
+    background: #0f1730;
+    border: round #35486f;
+    padding: 1 2;
+}
+
+.task-card {
+    background: #11182c;
+    border: round #24324d;
+    padding: 1 2;
+}
+
+.task-title {
+    text-style: bold;
+    color: #ffffff;
+}
+
+.label {
+    color: #8ea0c6;
+}
+
+.value {
+    color: #f4f7ff;
+}
+
+DataTable {
+    background: #0f1730;
+    color: #edf3ff;
+    border: round #24324d;
+}
+
+DataTable > .datatable--cursor {
+    background: #20314f;
+    color: #ffffff;
+    text-style: bold;
+}
+
+DataTable > .datatable--header {
+    background: #17213d;
+    color: #f4f7ff;
+    text-style: bold;
+}

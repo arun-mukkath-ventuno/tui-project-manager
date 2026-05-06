@@ -286,6 +286,57 @@ Primary content:
 - notes
 - related summary or suggestion
 
+## UI Direction
+
+The current UI is functional, but it should be redesigned to feel more deliberate
+and more polished than a standard terminal admin table. The goal is clearer
+hierarchy, faster scanning, and a stronger product identity.
+
+### Visual Language
+
+- Use a dark, high-contrast palette with one primary accent color
+- Keep status colors consistent across the app
+- Reserve bright colors for active selection, warnings, and important emphasis
+- Use spacing and panels to create clear visual separation between sections
+- Avoid default-looking table-heavy layouts where a richer treatment is possible
+
+### Dashboard Treatment
+
+- Add a stronger hero/header band with project count and last sync state
+- Make project rows feel more like cards or structured tiles
+- Render status counts as compact badges or chips
+- Add a visible stale/recent indicator
+- Make the selected project state obvious without relying on color alone
+
+### Drilldown Treatment
+
+- Use a split layout when the terminal size allows it
+- Keep the summary panel visually distinct from the task table
+- Render phase headers as group separators
+- Surface owner, status, and due date as small metadata elements
+- Give WIP and blocker states more visual weight than completed items
+
+### Task Detail Treatment
+
+- Use label/value grouping with stronger typographic hierarchy
+- Surface task status and ownership first
+- Keep source metadata visible but secondary
+- Leave room for notes, history, or audit context later
+
+### Motion and Feedback
+
+- Add subtle loading and refresh feedback
+- Make AI summary generation feel like an intentional action
+- Use light transition polish between dashboard and detail views
+
+### UI Polish Tasks
+
+- Add custom Textual CSS for spacing, palette, and typography
+- Introduce reusable status badges
+- Improve empty states so the UI still feels designed when data is sparse
+- Add a dashboard top band with counts and sync metadata
+- Differentiate active panes and selected rows more clearly
+
 ## MVP Commands
 
 - `vpm-tui run`
@@ -365,6 +416,20 @@ Write operations can be added later if needed.
 Stage 2 should be deferred until the MVP is stable.
 
 Possible Stage 2 additions:
+- configurable source roots instead of a fixed tracker path
+- stable project identity separate from display slug
+- more tolerant or pluggable markdown parsing
+- incremental sync instead of delete-and-reinsert on every refresh
+- persisted sync history and source hashing
+- typed MCP response schemas instead of raw JSON strings
+- clearer AI summary contracts and summary caching
+- real end-to-end tests with tracker fixtures from `/project-manager`
+- MCP integration tests for read and refresh tools
+- UI visual polish and layout refinement
+- custom Textual styling system
+- richer dashboard cards and section hierarchy
+- split-pane drilldown refinement
+- task detail card treatment
 - write-back editing from the TUI
 - task updates from MCP
 - Redis cache

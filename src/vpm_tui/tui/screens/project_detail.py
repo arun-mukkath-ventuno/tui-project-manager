@@ -3,7 +3,7 @@
 import asyncio
 
 from textual.app import ComposeResult
-from textual.containers import Vertical
+from textual.containers import Container
 from textual.screen import Screen
 from textual.widgets import DataTable, Footer, Header, Static
 
@@ -33,13 +33,15 @@ class ProjectDetailScreen(Screen):
 
     def compose(self) -> ComposeResult:
         yield Header()
-        with Vertical():
-            yield Static("", id="project-header")
+        with Container(classes="app-shell"):
+            yield Static("", id="project-header", classes="hero")
             yield SummaryPanel(id="summary-panel")
-            table = DataTable(id="tasks-table")
-            table.cursor_type = "row"
-            yield table
-            yield Static("", id="project-footer")
+            with Container(classes="panel"):
+                yield Static("Tasks", classes="section-title")
+                table = DataTable(id="tasks-table")
+                table.cursor_type = "row"
+                yield table
+            yield Static("", id="project-footer", classes="muted")
         yield Footer()
 
     def on_mount(self) -> None:
@@ -83,10 +85,19 @@ class ProjectDetailScreen(Screen):
 
             counts: dict[str, int] = {}
             total = 0
+            open_count = 0
+            wip_count = 0
+            done_count = 0
             for phase in project.phases:
                 for task in phase.tasks:
                     counts[task.status] = counts.get(task.status, 0) + 1
                     total += 1
+                    if task.status == "open":
+                        open_count += 1
+                    elif task.status == "wip":
+                        wip_count += 1
+                    elif task.status == "dev-complete":
+                        done_count += 1
                     table.add_row(
                         phase.name,
                         task.title,
@@ -96,9 +107,9 @@ class ProjectDetailScreen(Screen):
                     )
 
             header.update(
-                f"[b]{project.name}[/b] — {total} tasks  "
-                f"open={counts.get('open', 0)} wip={counts.get('wip', 0)} "
-                f"done={counts.get('dev-complete', 0)}"
+                f"[b]{project.name}[/b]\n"
+                f"[dim]{total} tasks · open {open_count} · "
+                f"wip {wip_count} · done {done_count}[/dim]"
             )
             footer.update(f"Source: {project.source_path}")
 

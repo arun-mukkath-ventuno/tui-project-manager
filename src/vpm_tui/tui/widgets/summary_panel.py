@@ -9,13 +9,12 @@ class SummaryPanel(Static):
     """Widget to display AI-generated summaries."""
 
     def on_mount(self) -> None:
-        self.update(
-            "[dim]Press [b]s[/b] to generate AI summary[/dim]"
-        )
+        self.add_class("summary-panel")
+        self.update("[dim]Press [b]s[/b] to generate AI summary[/dim]")
 
     def show_summary(self, summary: Summary) -> None:
         """Render a Summary model into the panel."""
-        lines = [f"[b]{summary.summary_text}[/b]", ""]
+        lines = ["[b]Summary[/b]", f"{summary.summary_text}", ""]
 
         if summary.highlights:
             lines.extend(

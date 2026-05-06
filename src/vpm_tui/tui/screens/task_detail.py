@@ -1,7 +1,7 @@
 """Task detail screen."""
 
 from textual.app import ComposeResult
-from textual.containers import Vertical
+from textual.containers import Container
 from textual.screen import Screen
 from textual.widgets import Footer, Header, Static
 
@@ -25,8 +25,9 @@ class TaskDetailScreen(Screen):
 
     def compose(self) -> ComposeResult:
         yield Header()
-        with Vertical():
-            yield Static("", id="task-info")
+        with Container(classes="app-shell"):
+            with Container(classes="task-card"):
+                yield Static("", id="task-info")
         yield Footer()
 
     def on_mount(self) -> None:
@@ -45,12 +46,13 @@ class TaskDetailScreen(Screen):
             project = phase.project
 
             lines = [
-                f"[b]Task:[/b]      {task.title}",
-                f"[b]Status:[/b]    {task.status}",
-                f"[b]Owner:[/b]     {task.owner or '-'}",
-                f"[b]Phase:[/b]     {phase.name}",
-                f"[b]Project:[/b]   {project.name}",
-                f"[b]Source:[/b]    {task.source_file}",
+                f"[b]Task[/b]\n{task.title}",
+                "",
+                f"[b]Status[/b]    [dim]{task.status}[/dim]",
+                f"[b]Owner[/b]     [dim]{task.owner or '-'}[/dim]",
+                f"[b]Phase[/b]     [dim]{phase.name}[/dim]",
+                f"[b]Project[/b]   [dim]{project.name}[/dim]",
+                f"[b]Source[/b]    [dim]{task.source_file}[/dim]",
                 "",
                 "[dim]Press [b]q[/b] to go back[/dim]",
             ]
