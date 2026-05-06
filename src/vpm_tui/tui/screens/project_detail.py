@@ -1,19 +1,26 @@
 """Project detail screen."""
 
+import asyncio
+
 from textual.app import ComposeResult
 from textual.containers import Vertical
 from textual.screen import Screen
 from textual.widgets import DataTable, Footer, Header, Static
 
+from vpm_tui.ai.summarizer import ProjectSummarizer
+from vpm_tui.config import settings
 from vpm_tui.db.repo import ProjectRepository
 from vpm_tui.db.session import SessionLocal
+from vpm_tui.tui.screens.task_detail import TaskDetailScreen
+from vpm_tui.tui.widgets.summary_panel import SummaryPanel
 
 
 class ProjectDetailScreen(Screen):
-    """Project detail drilldown screen."""
+    """Project detail drilldown screen with AI summary panel."""
 
     BINDINGS = [
         ("q", "action_back", "Back"),
+        ("s", "action_summarize", "Summarize"),
     ]
 
     def __init__(self, project_slug: str) -> None:
@@ -24,6 +31,7 @@ class ProjectDetailScreen(Screen):
         yield Header()
         with Vertical():
             yield Static("", id="project-header")
+            yield SummaryPanel(id="summary-panel")
             yield DataTable(id="tasks-table")
             yield Static("", id="project-footer")
         yield Footer()
@@ -33,6 +41,27 @@ class ProjectDetailScreen(Screen):
 
     def action_back(self) -> None:
         self.app.pop_screen()
+
+    async def action_summarize(self) -> None:
+        """Generate AI summary in background thread."""
+        panel = self.query_one("#summary-panel", SummaryPanel)
+
+        if not settings.openai_api_key:
+            panel.show_error("OPENAI_API_KEY not set in .env")
+            return
+
+        panel.show_loading()
+
+        summarizer = ProjectSummarizer()
+        try:
+            summary = await asyncio.to_thread(
+                summarizer.summarize, self.project_slug
+            )
+        except Exception as e:
+            panel.show_error(str(e))
+            return
+
+        panel.show_summary(summary)
 
     def _load_project(self) -> None:
         header = self.query_one("#project-header", Static)
@@ -72,6 +101,4 @@ class ProjectDetailScreen(Screen):
 
     def on_data_table_row_selected(self, event: DataTable.RowSelected) -> None:
         task_id = event.row_key.value
-        from vpm_tui.tui.screens.task_detail import TaskDetailScreen
-
         self.push_screen(TaskDetailScreen(task_id))
