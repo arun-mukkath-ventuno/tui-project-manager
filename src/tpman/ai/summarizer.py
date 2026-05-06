@@ -70,7 +70,6 @@ class ProjectSummarizer:
                     },
                     {"role": "user", "content": prompt},
                 ],
-                temperature=0.3,
             )
 
             data = self._parse_json(response)

@@ -1,9 +1,10 @@
 """OpenAI-compatible client wrapper."""
 
-import os
 from typing import Any
 
 from openai import OpenAI
+
+from tpman.config import settings
 
 
 class AIClient:
@@ -13,13 +14,13 @@ class AIClient:
         self,
         api_key: str | None = None,
         base_url: str | None = None,
-        model: str = "gpt-4o-mini",
+        model: str | None = None,
     ) -> None:
         self.client = OpenAI(
-            api_key=api_key or os.getenv("OPENAI_API_KEY"),
-            base_url=base_url or os.getenv("OPENAI_BASE_URL"),
+            api_key=api_key or settings.openai_api_key,
+            base_url=base_url or settings.openai_base_url,
         )
-        self.model = model
+        self.model = model or settings.openai_model
 
     def chat(self, messages: list[dict[str, str]], **kwargs: Any) -> str:
         """Send a chat completion request.
