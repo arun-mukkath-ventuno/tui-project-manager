@@ -13,6 +13,7 @@ class TaskDetailScreen(Screen):
     """Task detail screen."""
 
     BINDINGS = [
+        ("escape", "pop_screen", "Back"),
         ("q", "pop_screen", "Back"),
     ]
 
