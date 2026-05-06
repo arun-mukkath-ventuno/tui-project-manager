@@ -95,15 +95,17 @@ vpm-tui mcp
 
 ```
 Dashboard ──Enter──► Project Detail ──Enter──► Task Detail
-                    ◄── q/Escape ──►            ◄── q/Escape ──►
+                    ◄── Escape ──►            ◄── Escape ──►
 ```
 
 | Key | Action |
 |-----|--------|
 | `↑↓` | Navigate table rows |
 | `Enter` | Drill into selected row |
-| `r` | Refresh data from markdown |
-| `q` / `Escape` | Back / Quit |
+| `r` | Refresh data from markdown (dashboard) |
+| `s` | Generate AI summary (project detail) |
+| `Escape` | Go back (pushed screens) |
+| `q` | Quit app (anywhere) |
 
 ---
 
@@ -150,7 +152,7 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json`:
                            ▼
                     ┌──────────────┐
                     │  Ingest/Parser│◄── markdown trackers
-                    │  (markdown-it)│    from /project-manager
+                    │ (custom regex)│    from /project-manager
                     └──────────────┘
                            │
                            ▼

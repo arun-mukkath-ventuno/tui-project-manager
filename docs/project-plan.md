@@ -288,17 +288,17 @@ Primary content:
 
 ## MVP Commands
 
-- `vpm_tui run`
+- `vpm-tui run`
   - launch the TUI
-- `vpm_tui refresh`
+- `vpm-tui refresh`
   - re-read markdown and sync SQLite
-- `vpm_tui list`
+- `vpm-tui list`
   - print project list in the terminal
-- `vpm_tui show <project>`
+- `vpm-tui show <project>`
   - show a project drilldown in text form
-- `vpm_tui summarize <project>`
+- `vpm-tui summarize <project>`
   - generate a project summary
-- `vpm_tui mcp`
+- `vpm-tui mcp`
   - start the MCP server
 
 ## MVP Feature Set
