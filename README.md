@@ -9,6 +9,8 @@ AI-assisted summaries and MCP-based agent access.
 The markdown trackers remain the **source of truth**. This app only reads
 them — if SQLite is deleted, it rebuilds from markdown.
 
+Design direction for the UI lives in [docs/design-guideline.md](docs/design-guideline.md).
+
 ---
 
 ## Features
