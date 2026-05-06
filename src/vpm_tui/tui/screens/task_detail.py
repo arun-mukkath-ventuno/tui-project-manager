@@ -13,7 +13,7 @@ class TaskDetailScreen(Screen):
     """Task detail screen."""
 
     BINDINGS = [
-        ("q", "action_back", "Back"),
+        ("q", "pop_screen", "Back"),
     ]
 
     def __init__(self, task_id: str) -> None:
@@ -28,9 +28,6 @@ class TaskDetailScreen(Screen):
 
     def on_mount(self) -> None:
         self._load_task()
-
-    def action_back(self) -> None:
-        self.app.pop_screen()
 
     def _load_task(self) -> None:
         info = self.query_one("#task-info", Static)

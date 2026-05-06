@@ -19,8 +19,8 @@ class ProjectDetailScreen(Screen):
     """Project detail drilldown screen with AI summary panel."""
 
     BINDINGS = [
-        ("q", "action_back", "Back"),
-        ("s", "action_summarize", "Summarize"),
+        ("q", "pop_screen", "Back"),
+        ("s", "summarize", "Summarize"),
     ]
 
     def __init__(self, project_slug: str) -> None:
@@ -40,9 +40,6 @@ class ProjectDetailScreen(Screen):
 
     def on_mount(self) -> None:
         self._load_project()
-
-    def action_back(self) -> None:
-        self.app.pop_screen()
 
     async def action_summarize(self) -> None:
         """Generate AI summary in background thread."""

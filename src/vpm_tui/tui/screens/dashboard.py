@@ -15,7 +15,7 @@ class DashboardScreen(Screen):
     """Main dashboard screen showing all projects and status counts."""
 
     BINDINGS = [
-        ("r", "action_refresh", "Refresh"),
+        ("r", "refresh", "Refresh"),
         ("q", "quit", "Quit"),
     ]
 
