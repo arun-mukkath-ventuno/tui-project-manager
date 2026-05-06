@@ -12,9 +12,7 @@ from vpm_tui.db.session import SessionLocal
 class TaskDetailScreen(Screen):
     """Task detail screen."""
 
-    BINDINGS = [
-        ("q", "pop_screen", "Back"),
-    ]
+    BINDINGS = []
 
     def on_key(self, event) -> None:
         if event.key == "escape":

@@ -16,7 +16,6 @@ class DashboardScreen(Screen):
 
     BINDINGS = [
         ("r", "refresh", "Refresh"),
-        ("q", "quit", "Quit"),
     ]
 
     def compose(self) -> ComposeResult:

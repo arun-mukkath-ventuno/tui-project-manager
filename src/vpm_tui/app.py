@@ -10,7 +10,9 @@ class VpmTuiApp(App):
 
     TITLE = "TUI Project Manager"
     CSS_PATH = None
-    BINDINGS = []
+    BINDINGS = [
+        ("q", "quit", "Quit"),
+    ]
 
     def on_mount(self) -> None:
         self.push_screen(DashboardScreen())

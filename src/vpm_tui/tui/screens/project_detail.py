@@ -19,7 +19,6 @@ class ProjectDetailScreen(Screen):
     """Project detail drilldown screen with AI summary panel."""
 
     BINDINGS = [
-        ("q", "pop_screen", "Back"),
         ("s", "summarize", "Summarize"),
     ]
 
