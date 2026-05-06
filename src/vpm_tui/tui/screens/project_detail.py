@@ -103,4 +103,4 @@ class ProjectDetailScreen(Screen):
 
     def on_data_table_row_selected(self, event: DataTable.RowSelected) -> None:
         task_id = event.row_key.value
-        self.push_screen(TaskDetailScreen(task_id))
+        self.app.push_screen(TaskDetailScreen(task_id))

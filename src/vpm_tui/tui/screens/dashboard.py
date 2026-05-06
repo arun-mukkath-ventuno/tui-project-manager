@@ -51,7 +51,7 @@ class DashboardScreen(Screen):
         slug = event.row_key.value
         from vpm_tui.tui.screens.project_detail import ProjectDetailScreen
 
-        self.push_screen(ProjectDetailScreen(slug))
+        self.app.push_screen(ProjectDetailScreen(slug))
 
     def _load_projects(self) -> None:
         table = self.query_one("#projects-table", DataTable)
