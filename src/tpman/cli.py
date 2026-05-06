@@ -96,7 +96,9 @@ def summarize(project: str) -> None:
 @app.command()
 def mcp() -> None:
     """Start the MCP server."""
-    raise typer.Exit()
+    from tpman.mcp.server import main as mcp_main
+
+    mcp_main()
 
 
 def main() -> None:

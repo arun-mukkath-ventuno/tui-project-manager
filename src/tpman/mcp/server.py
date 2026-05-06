@@ -1,7 +1,14 @@
 """MCP server entrypoint."""
 
+import asyncio
 
-def create_server() -> None:
-    """Create and configure the MCP server."""
-    # TODO: import and configure from mcp SDK
-    pass
+from mcp.server.fastmcp import FastMCP
+
+from tpman.mcp.tools import register_tools
+
+mcp_server = FastMCP("tpman")
+register_tools(mcp_server)
+
+
+def main() -> None:
+    asyncio.run(mcp_server.run_stdio_async())
