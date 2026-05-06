@@ -32,7 +32,9 @@ class ProjectDetailScreen(Screen):
         with Vertical():
             yield Static("", id="project-header")
             yield SummaryPanel(id="summary-panel")
-            yield DataTable(id="tasks-table")
+            table = DataTable(id="tasks-table")
+            table.cursor_type = "row"
+            yield table
             yield Static("", id="project-footer")
         yield Footer()
 

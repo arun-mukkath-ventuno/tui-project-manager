@@ -23,7 +23,9 @@ class DashboardScreen(Screen):
         yield Header()
         with Vertical():
             yield Static("TUI Project Manager — Dashboard", id="title")
-            yield DataTable(id="projects-table")
+            table = DataTable(id="projects-table")
+            table.cursor_type = "row"
+            yield table
             yield Static("", id="status-bar")
         yield Footer()
 
