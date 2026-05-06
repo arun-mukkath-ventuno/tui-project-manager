@@ -19,10 +19,14 @@ class ProjectDetailScreen(Screen):
     """Project detail drilldown screen with AI summary panel."""
 
     BINDINGS = [
-        ("escape", "pop_screen", "Back"),
         ("q", "pop_screen", "Back"),
         ("s", "summarize", "Summarize"),
     ]
+
+    def on_key(self, event) -> None:
+        if event.key == "escape":
+            self.app.pop_screen()
+            event.stop()
 
     def __init__(self, project_slug: str) -> None:
         self.project_slug = project_slug

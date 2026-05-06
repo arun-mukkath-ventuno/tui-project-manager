@@ -13,9 +13,13 @@ class TaskDetailScreen(Screen):
     """Task detail screen."""
 
     BINDINGS = [
-        ("escape", "pop_screen", "Back"),
         ("q", "pop_screen", "Back"),
     ]
+
+    def on_key(self, event) -> None:
+        if event.key == "escape":
+            self.app.pop_screen()
+            event.stop()
 
     def __init__(self, task_id: str) -> None:
         self.task_id = task_id
