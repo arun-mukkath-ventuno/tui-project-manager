@@ -5,11 +5,11 @@ import json
 from sqlalchemy import select
 from sqlalchemy.orm import selectinload
 
-from tpman.config import settings
-from tpman.db.repo import ProjectRepository
-from tpman.db.schema import PhaseRecord, ProjectRecord, TaskRecord
-from tpman.db.session import SessionLocal
-from tpman.ingest.sync import init_db, sync_directory
+from vpm_tui.config import settings
+from vpm_tui.db.repo import ProjectRepository
+from vpm_tui.db.schema import PhaseRecord, ProjectRecord, TaskRecord
+from vpm_tui.db.session import SessionLocal
+from vpm_tui.ingest.sync import init_db, sync_directory
 
 
 def register_tools(mcp):
@@ -97,8 +97,8 @@ def register_tools(mcp):
     @mcp.tool()
     def generate_summary(project_slug: str) -> str:
         """Generate an AI summary for a project by slug."""
-        from tpman.ai.summarizer import ProjectSummarizer
-        from tpman.config import settings
+        from vpm_tui.ai.summarizer import ProjectSummarizer
+        from vpm_tui.config import settings
 
         if not settings.openai_api_key:
             return json.dumps(

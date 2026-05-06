@@ -4,7 +4,7 @@ import asyncio
 
 from mcp.server.fastmcp import FastMCP
 
-from tpman.mcp.tools import register_tools
+from vpm_tui.mcp.tools import register_tools
 
 
 def test_register_tools() -> None:

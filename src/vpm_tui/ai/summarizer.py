@@ -4,10 +4,10 @@ import json
 import re
 from datetime import UTC, datetime
 
-from tpman.ai.client import AIClient
-from tpman.db.repo import ProjectRepository
-from tpman.db.session import SessionLocal
-from tpman.models.summary import Summary
+from vpm_tui.ai.client import AIClient
+from vpm_tui.db.repo import ProjectRepository
+from vpm_tui.db.session import SessionLocal
+from vpm_tui.models.summary import Summary
 
 
 class ProjectSummarizer:

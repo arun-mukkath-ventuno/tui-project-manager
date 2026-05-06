@@ -62,10 +62,10 @@ PROJECTS_DIR=/Users/arunmukkath/Work/project-manager/task-trackers
 
 ```bash
 # Ingest markdown trackers into SQLite
-tpman refresh
+vpm-tui refresh
 
 # Launch the TUI dashboard
-tpman run
+vpm-tui run
 ```
 
 ---
@@ -74,19 +74,19 @@ tpman run
 
 ```bash
 # Re-sync markdown sources → SQLite
-tpman refresh
+vpm-tui refresh
 
 # List all projects with task counts
-tpman list
+vpm-tui list
 
 # Text drilldown of a single project
-tpman show web-player
+vpm-tui show web-player
 
 # Generate AI summary for a project
-tpman summarize bluekona-content-pipeline
+vpm-tui summarize bluekona-content-pipeline
 
 # Start MCP server (stdio transport)
-tpman mcp
+vpm-tui mcp
 ```
 
 ---
@@ -109,7 +109,7 @@ Dashboard ──Enter──► Project Detail ──Enter──► Task Detail
 
 ## MCP Server
 
-The `tpman mcp` command starts an MCP server over **stdio** — compatible with
+The `vpm-tui mcp` command starts an MCP server over **stdio** — compatible with
 Claude Desktop, Cursor, and any MCP client.
 
 Exposed tools:
@@ -129,8 +129,8 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json`:
 ```json
 {
   "mcpServers": {
-    "tpman": {
-      "command": "/Users/arunmukkath/Work/tui-project-manager/.venv/bin/tpman",
+    "vpm-tui": {
+      "command": "/Users/arunmukkath/Work/tui-project-manager/.venv/bin/vpm-tui",
       "args": ["mcp"]
     }
   }

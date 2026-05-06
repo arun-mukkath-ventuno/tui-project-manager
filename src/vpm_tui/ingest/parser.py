@@ -3,9 +3,9 @@
 import re
 from datetime import datetime
 
-from tpman.models.phase import Phase
-from tpman.models.project import Project
-from tpman.models.task import Task
+from vpm_tui.models.phase import Phase
+from vpm_tui.models.project import Project
+from vpm_tui.models.task import Task
 
 _TASK_LINE_RE = re.compile(
     r"^- \s*(open|wip|dev-complete|qa-complete|in-production)\s*\|\s*(.+)$"

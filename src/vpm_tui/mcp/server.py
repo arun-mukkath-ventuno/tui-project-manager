@@ -4,9 +4,9 @@ import asyncio
 
 from mcp.server.fastmcp import FastMCP
 
-from tpman.mcp.tools import register_tools
+from vpm_tui.mcp.tools import register_tools
 
-mcp_server = FastMCP("tpman")
+mcp_server = FastMCP("vpm_tui")
 register_tools(mcp_server)
 
 

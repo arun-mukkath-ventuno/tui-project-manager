@@ -2,11 +2,11 @@
 
 from textual.app import App
 
-from tpman.tui.screens.dashboard import DashboardScreen
+from vpm_tui.tui.screens.dashboard import DashboardScreen
 
 
-class TpmApp(App):
-    """Main Textual application for tpman."""
+class VpmTuiApp(App):
+    """Main Textual application for vpm_tui."""
 
     TITLE = "TUI Project Manager"
     CSS_PATH = None

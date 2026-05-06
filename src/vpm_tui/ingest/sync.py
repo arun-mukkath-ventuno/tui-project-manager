@@ -5,10 +5,10 @@ from pathlib import Path
 
 from sqlalchemy.orm import Session
 
-from tpman.db.engine import engine
-from tpman.db.schema import Base, PhaseRecord, ProjectRecord, TaskRecord
-from tpman.ingest.markdown_reader import find_markdown_files, read_file
-from tpman.ingest.parser import MarkdownParser
+from vpm_tui.db.engine import engine
+from vpm_tui.db.schema import Base, PhaseRecord, ProjectRecord, TaskRecord
+from vpm_tui.ingest.markdown_reader import find_markdown_files, read_file
+from vpm_tui.ingest.parser import MarkdownParser
 
 
 def init_db() -> None:

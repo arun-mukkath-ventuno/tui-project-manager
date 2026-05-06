@@ -142,7 +142,7 @@ tui-project-manager/
 ├── .env.example
 ├── .gitignore
 ├── src/
-│   └── tpman/
+│   └── vpm_tui/
 │       ├── __init__.py
 │       ├── app.py
 │       ├── cli.py
@@ -288,17 +288,17 @@ Primary content:
 
 ## MVP Commands
 
-- `tpman run`
+- `vpm_tui run`
   - launch the TUI
-- `tpman refresh`
+- `vpm_tui refresh`
   - re-read markdown and sync SQLite
-- `tpman list`
+- `vpm_tui list`
   - print project list in the terminal
-- `tpman show <project>`
+- `vpm_tui show <project>`
   - show a project drilldown in text form
-- `tpman summarize <project>`
+- `vpm_tui summarize <project>`
   - generate a project summary
-- `tpman mcp`
+- `vpm_tui mcp`
   - start the MCP server
 
 ## MVP Feature Set
@@ -419,7 +419,7 @@ Possible Stage 2 additions:
 
 Build the repo skeleton with:
 - `pyproject.toml`
-- `src/tpman/`
+- `src/vpm_tui/`
 - `docs/`
 - `tests/`
 - a minimal `README.md`

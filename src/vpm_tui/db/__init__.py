@@ -1,14 +1,14 @@
 """Database package."""
 
-from tpman.db.engine import engine
-from tpman.db.schema import (
+from vpm_tui.db.engine import engine
+from vpm_tui.db.schema import (
     Base,
     PhaseRecord,
     ProjectRecord,
     SummaryRecord,
     TaskRecord,
 )
-from tpman.db.session import SessionLocal
+from vpm_tui.db.session import SessionLocal
 
 __all__ = [
     "engine",

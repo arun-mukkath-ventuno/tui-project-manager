@@ -5,8 +5,8 @@ from textual.containers import Vertical
 from textual.screen import Screen
 from textual.widgets import Footer, Header, Static
 
-from tpman.db.schema import TaskRecord
-from tpman.db.session import SessionLocal
+from vpm_tui.db.schema import TaskRecord
+from vpm_tui.db.session import SessionLocal
 
 
 class TaskDetailScreen(Screen):

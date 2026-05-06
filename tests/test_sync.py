@@ -6,8 +6,8 @@ from pathlib import Path
 from sqlalchemy import create_engine, select
 from sqlalchemy.orm import sessionmaker
 
-from tpman.db.schema import Base, PhaseRecord, ProjectRecord, TaskRecord
-from tpman.ingest.sync import sync_directory
+from vpm_tui.db.schema import Base, PhaseRecord, ProjectRecord, TaskRecord
+from vpm_tui.ingest.sync import sync_directory
 
 SAMPLE_MD = """\
 # Test Sync — Task Tracker

@@ -3,7 +3,7 @@
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from tpman.db.schema import PhaseRecord, ProjectRecord
+from vpm_tui.db.schema import PhaseRecord, ProjectRecord
 
 
 class ProjectRepository:

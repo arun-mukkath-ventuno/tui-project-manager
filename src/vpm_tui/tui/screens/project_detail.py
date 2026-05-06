@@ -5,8 +5,8 @@ from textual.containers import Vertical
 from textual.screen import Screen
 from textual.widgets import DataTable, Footer, Header, Static
 
-from tpman.db.repo import ProjectRepository
-from tpman.db.session import SessionLocal
+from vpm_tui.db.repo import ProjectRepository
+from vpm_tui.db.session import SessionLocal
 
 
 class ProjectDetailScreen(Screen):
@@ -72,6 +72,6 @@ class ProjectDetailScreen(Screen):
 
     def on_data_table_row_selected(self, event: DataTable.RowSelected) -> None:
         task_id = event.row_key.value
-        from tpman.tui.screens.task_detail import TaskDetailScreen
+        from vpm_tui.tui.screens.task_detail import TaskDetailScreen
 
         self.push_screen(TaskDetailScreen(task_id))

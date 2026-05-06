@@ -1,6 +1,6 @@
 """Tests for markdown parser."""
 
-from tpman.ingest.parser import MarkdownParser
+from vpm_tui.ingest.parser import MarkdownParser
 
 SAMPLE_TRACKER = """\
 # Test Project — Task Tracker

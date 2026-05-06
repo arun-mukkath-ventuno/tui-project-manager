@@ -3,8 +3,8 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from tpman.db.repo import ProjectRepository
-from tpman.db.schema import Base, PhaseRecord, ProjectRecord, TaskRecord
+from vpm_tui.db.repo import ProjectRepository
+from vpm_tui.db.schema import Base, PhaseRecord, ProjectRecord, TaskRecord
 
 
 def test_repo_get_all_ordered() -> None:

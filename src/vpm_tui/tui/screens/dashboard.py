@@ -7,8 +7,8 @@ from textual.containers import Vertical
 from textual.screen import Screen
 from textual.widgets import DataTable, Footer, Header, Static
 
-from tpman.db.repo import ProjectRepository
-from tpman.db.session import SessionLocal
+from vpm_tui.db.repo import ProjectRepository
+from vpm_tui.db.session import SessionLocal
 
 
 class DashboardScreen(Screen):
@@ -31,8 +31,8 @@ class DashboardScreen(Screen):
         self._load_projects()
 
     def action_refresh(self) -> None:
-        from tpman.config import settings
-        from tpman.ingest.sync import init_db, sync_directory
+        from vpm_tui.config import settings
+        from vpm_tui.ingest.sync import init_db, sync_directory
 
         if settings.projects_dir.exists():
             init_db()
@@ -47,7 +47,7 @@ class DashboardScreen(Screen):
 
     def on_data_table_row_selected(self, event: DataTable.RowSelected) -> None:
         slug = event.row_key.value
-        from tpman.tui.screens.project_detail import ProjectDetailScreen
+        from vpm_tui.tui.screens.project_detail import ProjectDetailScreen
 
         self.push_screen(ProjectDetailScreen(slug))
 

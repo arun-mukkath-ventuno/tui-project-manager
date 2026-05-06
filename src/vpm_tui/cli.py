@@ -1,9 +1,9 @@
-"""CLI commands for tpman."""
+"""CLI commands for vpm_tui."""
 
 import typer
 
 app = typer.Typer(
-    name="tpman",
+    name="vpm_tui",
     help="TUI Project Manager",
     no_args_is_help=True,
 )
@@ -12,18 +12,18 @@ app = typer.Typer(
 @app.command()
 def run() -> None:
     """Launch the TUI."""
-    from tpman.app import TpmApp
+    from vpm_tui.app import VpmTuiApp
 
-    TpmApp().run()
+    VpmTuiApp().run()
 
 
 @app.command()
 def refresh() -> None:
     """Re-read markdown and sync SQLite."""
 
-    from tpman.config import settings
-    from tpman.db.session import SessionLocal
-    from tpman.ingest.sync import init_db, sync_directory
+    from vpm_tui.config import settings
+    from vpm_tui.db.session import SessionLocal
+    from vpm_tui.ingest.sync import init_db, sync_directory
 
     if not settings.projects_dir.exists():
         typer.echo(f"Projects directory not found: {settings.projects_dir}")
@@ -43,8 +43,8 @@ def list_projects() -> None:
     """Print project list in the terminal."""
     import json
 
-    from tpman.db.repo import ProjectRepository
-    from tpman.db.session import SessionLocal
+    from vpm_tui.db.repo import ProjectRepository
+    from vpm_tui.db.session import SessionLocal
 
     with SessionLocal() as session:
         repo = ProjectRepository(session)
@@ -68,8 +68,8 @@ def show(project: str) -> None:
     """Show a project drilldown in text form."""
     import json
 
-    from tpman.db.repo import ProjectRepository
-    from tpman.db.session import SessionLocal
+    from vpm_tui.db.repo import ProjectRepository
+    from vpm_tui.db.session import SessionLocal
 
     with SessionLocal() as session:
         repo = ProjectRepository(session)
@@ -91,10 +91,10 @@ def show(project: str) -> None:
 def summarize(project: str) -> None:
     """Generate a project summary via LLM."""
 
-    from tpman.ai.summarizer import ProjectSummarizer
-    from tpman.config import settings
-    from tpman.db.repo import ProjectRepository
-    from tpman.db.session import SessionLocal
+    from vpm_tui.ai.summarizer import ProjectSummarizer
+    from vpm_tui.config import settings
+    from vpm_tui.db.repo import ProjectRepository
+    from vpm_tui.db.session import SessionLocal
 
     if not settings.openai_api_key:
         typer.echo(
@@ -143,7 +143,7 @@ def summarize(project: str) -> None:
 @app.command()
 def mcp() -> None:
     """Start the MCP server."""
-    from tpman.mcp.server import main as mcp_main
+    from vpm_tui.mcp.server import main as mcp_main
 
     mcp_main()
 

@@ -2,7 +2,7 @@
 
 from typer.testing import CliRunner
 
-from tpman.cli import app
+from vpm_tui.cli import app
 
 runner = CliRunner()
 

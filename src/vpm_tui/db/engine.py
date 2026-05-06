@@ -2,8 +2,8 @@
 
 from sqlalchemy import create_engine
 
-from tpman.config import settings
-from tpman.utils.paths import ensure_dir
+from vpm_tui.config import settings
+from vpm_tui.utils.paths import ensure_dir
 
 ensure_dir(settings.data_dir)
 

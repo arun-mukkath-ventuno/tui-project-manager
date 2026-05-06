@@ -4,7 +4,7 @@ from typing import Any
 
 from openai import OpenAI
 
-from tpman.config import settings
+from vpm_tui.config import settings
 
 
 class AIClient:

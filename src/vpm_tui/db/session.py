@@ -2,6 +2,6 @@
 
 from sqlalchemy.orm import sessionmaker
 
-from tpman.db.engine import engine
+from vpm_tui.db.engine import engine
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
